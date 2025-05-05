@@ -1,9 +1,9 @@
 #include <iostream>
 
-void reformatText(const char* text, int n) {
+void reform(const char* text, int n) {
     char word[100], line[1000];
     int word_len = 0, line_len = 0;
-    bool firstWordInLine = true;
+    bool first_word = true;
 
     for (int i = 0; text[i] != '\0'; ++i) {
         char ch = text[i];
@@ -11,14 +11,14 @@ void reformatText(const char* text, int n) {
         if (ch == ' ' || ch == '\n') {
             if (word_len > 0) {
                 word[word_len] = '\0';
-                if (line_len + word_len + (firstWordInLine ? 0 : 1) > n) {
+                if (line_len + word_len + (first_word ? 0 : 1) > n) {
                     std::cout << line << std::endl;
                     line_len = 0;
                 }
                 if (line_len > 0) {
                     line[line_len++] = ' ';
                 }
-                for (int j = 0; j < word_len; ++j) {
+                for (int j = 0; j < word_len; j++) {
                     line[line_len++] = word[j];
                 }
                 firstWordInLine = false;
@@ -30,7 +30,7 @@ void reformatText(const char* text, int n) {
                     std::cout << line << std::endl;
                 }
                 line_len = 0;
-                firstWordInLine = true;
+                first_word = true;
             }
         } else {
             word[word_len++] = ch;
@@ -52,7 +52,7 @@ int main() {
     std::cin >> n;
     std::cin.ignore();
 
-    reformatText(text, n);
+    reform(text, n);
 
     return 0;
 }
